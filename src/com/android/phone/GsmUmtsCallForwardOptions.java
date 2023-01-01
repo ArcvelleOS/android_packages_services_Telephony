@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 // QTI_END: 2018-04-09: Telephony: IMS: Add data check for UT supplementary service of CallForwarding
 import android.database.Cursor;
+import android.net.Uri;
 // QTI_BEGIN: 2024-03-18: Telephony: Allow to query CF from UI when Wi-Fi is on
 import android.net.NetworkCapabilities;
 // QTI_END: 2024-03-18: Telephony: Allow to query CF from UI when Wi-Fi is on
@@ -697,6 +698,19 @@ public class GsmUmtsCallForwardOptions extends TimeConsumingPreferenceActivity
             Log.d(LOG_TAG, "onActivityResult: contact picker result not OK.");
             return;
         }
+
+        if (data == null) {
+            Log.w(LOG_TAG, "onActivityResult: data is null");
+            return;
+        }
+
+        Uri contactUri = data.getData();
+        if (contactUri == null) {
+            Log.w(LOG_TAG, "onActivityResult: contactUri is null");
+            return;
+        }
+        ContactPermissionUtils.checkContactUriPermission(getCurrentCaller(), contactUri);
+
         Cursor cursor = null;
         try {
             // check if the URI returned by the user belongs to the user
