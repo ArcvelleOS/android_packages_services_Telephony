@@ -28,6 +28,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 // QTI_END: 2018-04-09: Telephony: IMS: Add data check for UT supplementary service of CallForwarding
 import android.database.Cursor;
+import android.net.Uri;
 // QTI_BEGIN: 2024-03-18: Telephony: Allow to query CF from UI when Wi-Fi is on
 import android.net.NetworkCapabilities;
 // QTI_END: 2024-03-18: Telephony: Allow to query CF from UI when Wi-Fi is on
